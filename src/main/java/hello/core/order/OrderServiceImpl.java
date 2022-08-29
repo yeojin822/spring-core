@@ -1,14 +1,26 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import hello.core.member.MemoryMemberRepository;
 
+//사용 영역
 public class OrderServiceImpl implements OrderService{
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+
+
+    /* 할인 정책을 변경하려면 클라이언트인 OrderServiceImpl 코드를 고쳐야 한다.
+    *  DIP를 위반하지 않도록 인터페이스에만 의존하도록 의존관계를 변경하면 된다. */
+    //  private final MemberRepository memberRepository = new MemoryMemberRepository();
+    //  private final DiscountPolicy discountPolicy = new FixDiscountPolicy(); //공연의 주인공을 자신이 직접 초빙하는 것과 같다. -> 기획자 등장(config)
+    //  private final DiscountPolicy discountPolicy = new RateDiscountPolicy();
+
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
