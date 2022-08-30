@@ -15,17 +15,23 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AppConfig {
 
+     //@Bean memberService -> new MemoryMemberRepository()
+     //@Bean orderService -> new MemoryMemberRepository()
+
     /* 중복을 제거하고, 역할에 따른 구현이 보이도록 리팩터링 */
     @Bean
     public MemberService memberService(){
+        System.out.println("call AppConfig.memberService");
         return new MemberServiceImpl(memberRepository());
     }
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
     @Bean
     public OrderService orderService(){
+        System.out.println("call AppConfig.orderService");
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
     @Bean
