@@ -15,8 +15,8 @@ import org.springframework.context.annotation.FilterType;
                 Configuration.class))
 public class AutoAppConfig {
     //Overriding bean definition for bean 'memoryMemberRepository' ->  수동 빈 등록이 우선권을 가진다.
-    @Bean(name = "memoryMemberRepository")
-    public MemberRepository memberRepository() {
-        return new MemoryMemberRepository();
-    }
+//    @Bean(name = "memoryMemberRepository")
+//    public MemberRepository memberRepository() {
+//        return new MemoryMemberRepository();
+//    }
 }
